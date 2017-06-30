@@ -1,0 +1,19 @@
+{
+  "name": "angularjs-todo",
+  "version": "1.0.0",
+  "description": "angularJS tutorial",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/markie036/angularJS-todo.git"
+  },
+  "author": "Mark Harrison",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/markie036/angularJS-todo/issues"
+  },
+  "homepage": "https://github.com/markie036/angularJS-todo#readme"
+}
