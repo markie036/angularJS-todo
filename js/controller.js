@@ -9,7 +9,7 @@ angular.module('RouteControllers', [])
 
         //Code for when the user has logged in
         $scope.login = function() {
-            UserAPIService.callAPI(URL + "accounts/api-token-auth/", $scope.data).then(function(results) {
+            UserAPIService.registerUser(URL + "accounts/api-token-auth/", $scope.data).then(function(results) {
                 $scope.token = results.data.token;
                 console.log($scope.token);
             }).catch(function(err) {
@@ -23,7 +23,7 @@ angular.module('RouteControllers', [])
                 $scope.registrationUser.username = $scope.user.username;
                 $scope.registrationUser.password = $scope.user.password;
  		//registerUser been changed to callAPI as user has now been registered
-                UserAPIService.callAPI(URL + "accounts/register/", $scope.registrationUser).then(function(results) {
+                UserAPIService.registerUser(URL + "accounts/register/", $scope.registrationUser).then(function(results) {
                     $scope.data = results.data;
                     alert("You have successfully registered to Angular Todo");
                 }).catch(function(err) {
