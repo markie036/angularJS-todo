@@ -16,7 +16,7 @@ angular.module('TodoApp').config(function($locationProvider, $routeProvider) {
     	controller: 'TodoController'
     })
     .when('/todo/edit/:id', {
-        templateURL:'templates/edit-todo.html',
+        templateUrl:'templates/edit-todo.html',
         controller:'EditTodoController'
     });
 });
