@@ -59,7 +59,7 @@ angular.module('RouteControllers', [])
                 $scope.loginUser.password = $scope.user.password;
 
         //registerUser been changed to callAPI as user has now been registered
-                UserAPIService.callAPI(URL + "accounts/login/", $scope.loginUser).then(function(results) {
+                UserAPIService.callAPI(URL + "accounts/api-token-auth/", $scope.loginUser).then(function(results) {
                     $scope.data = results.data.token;
                     alert("You have successfully logged in you handsome man");
                     store.set('username', $scope.login.username);
