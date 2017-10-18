@@ -74,13 +74,11 @@ angular.module('RouteControllers', [])
     })
 
      //this function will log a user out
-    .controller('LogoutController', function($scope, $location, store) {
-
-        store.remove(‘username’);
-        store.remove(‘authToken’); 
+    .controller('LogoutController', function(store) {
+        store.remove('username');
+        store.remove('authToken'); 
 
     })
-
 
     .controller('TodoController', function($scope, $location, TodoAPIService, store) {
         if (!store.get('authToken')) {
