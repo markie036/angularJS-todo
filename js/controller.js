@@ -3,7 +3,10 @@ angular.module('RouteControllers', [])
         $scope.title = "Welcome To Angular Todo!"
     })
     .controller('RegisterController', function($scope, UserAPIService, store) {
-        $scope.registrationUser = {};
+        if (!store.get('authToken')) {   //if statement to check if user has been logged in...
+            $location.path("/todo");    //...and where they should go once they are
+        }
+        $scope.registrationUser = {}; // empty object on our $scope here
         var URL = "https://morning-castle-91468.herokuapp.com/";
 
         var authStorage = {
@@ -25,9 +28,9 @@ angular.module('RouteControllers', [])
         }
         //Login code ends
 
-        $scope.submitForm = function() {
-            if ($scope.registrationForm.$valid) {
-                $scope.registrationUser.username = $scope.user.username;
+        $scope.submitForm = function() { 
+            if ($scope.registrationForm.$valid) { // we are asking angular to submit the username and password data if the forms fields are valid.
+                $scope.registrationUser.username = $scope.user.username; //scope will add these as a user within the data 
                 $scope.registrationUser.password = $scope.user.password;
 
         //registerUser been changed to callAPI as user has now been registered
@@ -42,8 +45,47 @@ angular.module('RouteControllers', [])
             }
         };
     })
+    
+    // this will log a user in after registering
+    .controller('LoginController', function($scope, $location, UserAPIService, store) {
+        if (!store.get('authToken')) {
+            $location.path("/todo");
+        } 
+        var URL = "https://morning-castle-91468.herokuapp.com/";
+
+        $scope.submitForm = function() { 
+            if ($scope.loginForm.$valid) { // we are asking angular to submit the username and password data if the forms fields are valid.
+                $scope.loginUser.username = $scope.user.username; //scope will add these as a user within the data 
+                $scope.loginUser.password = $scope.user.password;
+
+        //registerUser been changed to callAPI as user has now been registered
+                UserAPIService.callAPI(URL + "accounts/api-token-auth/", $scope.loginUser).then(function(results) {
+                    $scope.data = results.data.token;
+                    alert("You have successfully logged in you handsome man");
+                    store.set('username', $scope.login.username);
+                    store.set('authToken', $scope.token);
+                    $location.path('/todo');
+                }).catch(function(err) {
+                    console.log(err);
+                    alert("Login failed, try again with another name cool dude.");
+                });
+            }
+        };
+    })
+
+     //this function will log a user out
+    .controller('LogoutController', function($scope, $location, store) {
+
+        store.remove(‘username’);
+        store.remove(‘authToken’); 
+
+    })
+
 
     .controller('TodoController', function($scope, $location, TodoAPIService, store) {
+        if (!store.get('authToken')) {
+            $location.path("/accounts/register");
+        }
         var URL = "https://morning-castle-91468.herokuapp.com/";
  
         $scope.authToken = store.get('authToken');
