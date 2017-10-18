@@ -62,7 +62,7 @@ angular.module('RouteControllers', [])
                 UserAPIService.callAPI(URL + "accounts/api-token-auth/", $scope.loginUser).then(function(results) {
                     $scope.data = results.data.token;
                     alert("You have successfully logged in you handsome man");
-                    store.set('username', $scope.login.username);
+                    store.set('username', $scope.loginUser.username);
                     store.set('authToken', $scope.token);
                     $location.path('/todo');
                 }).catch(function(err) {
