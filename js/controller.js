@@ -48,9 +48,9 @@ angular.module('RouteControllers', [])
     
     // this will log a user in after registering
     .controller('LoginController', function($scope, $location, UserAPIService, store) {
-        //if (!store.get('authToken')) {
-            //$location.path("/todo");
-        //} 
+        if (!store.get('authToken')) { //If statement to redirect logged in user to todo page. Will search for token for approval, 
+            $location.path("/todo"); // but if it can't find the token, user will remain on page.
+        } 
         var URL = "https://morning-castle-91468.herokuapp.com/";
 
         $scope.submitForm = function() { 
