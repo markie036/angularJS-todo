@@ -36,11 +36,11 @@ angular.module('RouteControllers', [])
         //registerUser been changed to callAPI as user has now been registered
                 UserAPIService.callAPI(URL + "accounts/register/", $scope.registrationUser).then(function(results) {
                     $scope.data = results.data;
-                    alert("You have successfully registered to Angular Todo");
+                    alert("ALRIIIGHT!! You have successfully registered to Angular Todo you cool dude");
                     $scope.login();
                 }).catch(function(err) {
                     console.log(err);
-                    alert("Registration failed, please try again with another username.");
+                    alert("Ahh man! Registration failed, please try again with another username.");
                 });
             }
         };
@@ -51,6 +51,7 @@ angular.module('RouteControllers', [])
         if (!store.get('authToken')) { //If statement to redirect logged in user to todo page. Will search for token for approval, 
             $location.path("/todo"); // but if it can't find the token, user will remain on page.
         } 
+        $scope.loginUser = {}; // empty object on our $scope here
         var URL = "https://morning-castle-91468.herokuapp.com/";
 
         $scope.submitForm = function() { 
