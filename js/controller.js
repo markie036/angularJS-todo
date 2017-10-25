@@ -3,7 +3,7 @@ angular.module('RouteControllers', [])
         $scope.title = "Welcome To Angular Todo!"
     })
     .controller('RegisterController', function($scope, UserAPIService, store) {
-        if (!store.get('authToken')) {   //if statement to check if user has been logged in...
+        if (store.get('authToken')) {   //if statement to check if user has been logged in...
             $location.path("/todo");    //...and where they should go once they are
         }
         $scope.registrationUser = {}; // empty object on our $scope here
@@ -82,9 +82,9 @@ angular.module('RouteControllers', [])
     })
 
     .controller('TodoController', function($scope, $location, TodoAPIService, store) {
-        //if (!store.get('authToken')) {
-            //$location.path("/accounts/register");
-        //}
+        if (!store.get('authToken')) {
+            $location.path("/accounts/register");
+        }
         var URL = "https://morning-castle-91468.herokuapp.com/";
  
         $scope.authToken = store.get('authToken');
