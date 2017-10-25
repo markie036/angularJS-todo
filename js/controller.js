@@ -82,9 +82,9 @@ angular.module('RouteControllers', [])
     })
 
     .controller('TodoController', function($scope, $location, TodoAPIService, store) {
-        if (!store.get('authToken')) {
-            $location.path("/accounts/register");
-        }
+        //if (!store.get('authToken')) {
+            //$location.path("/accounts/register");
+        //}
         var URL = "https://morning-castle-91468.herokuapp.com/";
  
         $scope.authToken = store.get('authToken');
