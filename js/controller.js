@@ -3,7 +3,9 @@ angular.module('RouteControllers', [])
         $scope.title = "Welcome To Angular Todo!"
     })
     .controller('RegisterController', function($scope, UserAPIService, store) {
-
+        if (store.get('authToken')) {// will look for token and if found will redirect user to todo page
+            $location.path("/todo");
+        }
         $scope.registrationUser = {}; // empty object on our $scope here
         var URL = "https://morning-castle-91468.herokuapp.com/";
 
@@ -46,7 +48,9 @@ angular.module('RouteControllers', [])
     
     // this will log a user in after registering
     .controller('LoginController', function($scope, $location, UserAPIService, store) {
-
+        if (store.get('authToken')) { // will look for token and if found will redirect user to todo page
+            $location.path("/todo");
+        }
         $scope.loginUser = {}; // empty object on our $scope here
         var URL = "https://morning-castle-91468.herokuapp.com/";
 
@@ -78,7 +82,9 @@ angular.module('RouteControllers', [])
     })
 
     .controller('TodoController', function($scope, $location, TodoAPIService, store) {
-    
+    if (!store.get('authToken')) { // will look for token and if not found will redirect user to register page to create an account
+            $location.path("/accounts/register");
+        }
         var URL = "https://morning-castle-91468.herokuapp.com/";
  
         $scope.authToken = store.get('authToken');
