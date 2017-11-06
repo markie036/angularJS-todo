@@ -18,15 +18,15 @@ angular.module('TodoService', [])
             },
 
             createTodo: function(url, data, token) {
-            	header = "Authorization: JWT " + token;
+            	var header = "Authorization: JWT " + token;
             	return $http.post(url, data, header);
             },
             editTodo: function(url, data, token) {
-                header = "Authorization: JWT " + token;
+                var header = "Authorization: JWT " + token;
                 return $http.put(url, data, header);
             },
             deleteTodo: function(url, token) {
-                header = "Authorization: JWT " + token;
+                var header = "Authorization: JWT " + token;
                 return $http.delete(url, token);
             }
         }
